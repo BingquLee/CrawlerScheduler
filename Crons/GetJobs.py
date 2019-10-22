@@ -16,7 +16,7 @@ def get_jobs():
             file_sql = "SELECT * FROM files WHERE status=0 AND account='{}' LIMIT {}".format(job[2], job[6])
             file_list = cursor.execute(file_sql).fetchall()
             for file in file_list:
-                video_uploader(job[2], r'E:\Documents\PythonProjects\CrawlerScheduler\Videos\{}\To_{}\{}.mp4'.format(file[1], file[2], file[0]))
+                video_uploader(job[2], r'E:\Documents\PythonProjects\CrawlerScheduler\Videos\{}\To_{}\{}.mp4'.format(file[1], file[2], file[0]), job[5])
                 file_update_sql = "UPDATE files SET status=1 WHERE id='{}';".format(file[0])
                 cursor.execute(file_update_sql)
                 conn.commit()
