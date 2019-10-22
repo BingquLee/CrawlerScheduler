@@ -28,13 +28,16 @@ class Jobs(APIView):
         return Response(data_list, status=status.HTTP_200_OK)
 
     def post(self, request):
+        print(request.query_params.dict())
         params = request.query_params.dict()
         request.data['text'] = params.get('text', '')
         request.data['file_amount'] = params.get('file_amount', 1)
+        request.data['status'] = 0
         request.data['update_ts'] = int(time.time())
         request.data['update_dt'] = ts2datetime(request.data['update_ts'])
         serializer = JobsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+            # return render(request, 'Jobs.html')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

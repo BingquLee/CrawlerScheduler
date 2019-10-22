@@ -10,6 +10,7 @@ class Jobs(models.Model):
     publish_freq = models.CharField(max_length=16)
     text = models.TextField(max_length=4096, blank=True, null=True)
     file_amount = models.IntegerField(blank=False)
+    status = models.BooleanField(blank=False)
     update_ts = models.BigIntegerField(blank=False)
     update_dt = models.DateField(blank=False)
 
